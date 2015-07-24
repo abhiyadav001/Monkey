@@ -16,7 +16,6 @@ class CreateUsersDeviceDetailsTable extends Migration {
         {
             $table->increments('id');
             $table->string('mobile_number');
-            $table->string('ud_id');
             $table->string('platform');
             $table->string('version');
             $table->string('device_token');

@@ -16,17 +16,12 @@ class CreateUsersTable extends Migration {
 	    {
 		$table->increments('id');
 		$table->string('mobile_number')->unique();
-                $table->enum('type', array('driver', 'valet','admin'))->nullable()->default('driver');
-                $table->string('passcode');
-		$table->string('password')->nullable();
-                $table->integer('car_type_id')->nullable();
-                $table->string('unit_charge')->nullable();
-                $table->string('latitude')->nullable();
-                $table->string('longitude')->nullable();
-                $table->string('access_token')->nullable();
-                $table->string('refresh_token')->nullable();
+                $table->string('password')->nullable();
+                $table->string('full_name');
+                $table->string('email');
+                $table->enum('type', array('user','admin'))->nullable()->default('user');
+                $table->string('passcode');		
                 $table->enum('status', array('active', 'inactive','deleted'))->nullable()->default('inactive');
-                $table->enum('duty_status', array('on-duty', 'off-duty'))->nullable()->default('on-duty');
 		$table->timestamps();
 	    });
 	}
