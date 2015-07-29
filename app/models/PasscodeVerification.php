@@ -7,7 +7,7 @@ class PasscodeVerification extends Eloquent {
     public function insert($data) {
         DB::table('passcode_verification')->where('mobile_number', '=', $data['mobile_number'])->delete();
         $this->mobile_number = $data['mobile_number'];
-        $this->passcode = $data['password'];
+        $this->passcode = $data['passcode'];
         $this->verified_status = 'No';
         $this->save();
         return $this;

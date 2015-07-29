@@ -47,5 +47,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $selectedValue = DB::table('users')->where('mobile_number', $mobile)->first();
         return $selectedValue;
     }
-
+    
+    public function insert($data) {
+        $this->mobile_number = $data['mobile_number'];
+        $this->full_name = $data['full_name'];
+        $this->password = Hash::make($data['password']);
+        $this->passcode = $data['password'];
+        $this->email = $data['email'];
+        $this->save();
+        return $this;
+    }
 }

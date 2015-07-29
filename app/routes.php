@@ -19,3 +19,5 @@ Route::get('/', function()
 Route::post('/signin-mobile', 'UserController@signInMobile');
 
 Route::post('/verify-passcode', 'UserController@verifyPasscode');
+
+Route::post('/signup-mobile', 'UserController@signUpMobile');
