@@ -25,5 +25,18 @@ class SearchController extends \BaseController {
             200
         );
     }
+    
+    public function getLocations() {
+        $locations = DB::table('location_mapping')->get();
+        $msg='Locations retrived successfully.';
+        return $data=$this->successMessageWithVar($msg, $locations, 'locations');
+    }
+    
+    public function getAppSettings() {
+        $location=Input::get('location');
+        $appSetting = DB::table('app_settings')->where('location',$location)->get();
+        $msg="App Setting retrived successfully.";
+        return $data=$this->successMessageWithVar($msg, $appSetting, 'app-settings');
+    }
 
 }

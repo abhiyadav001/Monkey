@@ -23,3 +23,7 @@ Route::post('/verify-passcode', 'UserController@verifyPasscode');
 Route::post('/signup-mobile', 'UserController@signUpMobile');
 
 Route::get('/search', 'SearchController@index');
+
+Route::get('/locations', 'SearchController@getLocations');
+
+Route::get('/app-settings', 'SearchController@getAppSettings');
