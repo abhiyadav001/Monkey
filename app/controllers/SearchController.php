@@ -9,9 +9,8 @@ class SearchController extends \BaseController {
 	 */
 	public function index()
 	{
-            $name=Input::get('name');
             $medicine=new Medicine;
-            $medicines=$medicine->findMedicines($name);
+            $medicines=$medicine->findMedicines();
             $msg='Medicine results are retrived successfully.';
             return $data=$this->successMessageWithVar($msg, $medicines, 'medicines');
 	}

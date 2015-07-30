@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 		$table->string('mobile_number')->unique();
                 $table->string('password')->nullable();
                 $table->string('full_name');
-                $table->string('email');
+                $table->string('email')->unique();
                 $table->enum('type', array('user','admin'))->nullable()->default('user');
                 $table->string('passcode')->nullable();		
                 $table->enum('status', array('active', 'inactive','deleted'))->nullable()->default('active');

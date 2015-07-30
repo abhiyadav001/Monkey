@@ -57,4 +57,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $this->save();
         return $this;
     }
+    
+    public function validateAndGetData() {
+         return $userDetails = DB::table($this->table)->where('mobile_number',Input::get('username'))
+                ->orWhere('email',Input::get('username'))->first(); 
+    }
 }
