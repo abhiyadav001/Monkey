@@ -29,3 +29,4 @@ Route::get('/locations', 'SearchController@getLocations');
 Route::get('/app-settings', 'SearchController@getAppSettings');
 
 Route::resource('orders', 'OrderController');
+Route::resource('reviews', 'ReviewController');
