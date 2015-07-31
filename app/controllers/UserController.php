@@ -65,7 +65,7 @@ class UserController extends \BaseController {
         
         if (isset($userDetail->password)&&(Hash::check(Input::get('password'), $userDetail->password))) {
             $msg = "Signin successfully.";
-            return $this->successMessageWithVar($msg, $userDetail, 'userDetail');
+            return $this->successMessageWithVar($msg, $userDetail, 'userDetails');
         } else {
             $msg[] = "Sorry! wrong credentials provided.";
             return $this->errorMessage($msg);
@@ -79,9 +79,9 @@ class UserController extends \BaseController {
         $data = Input::all();
         $deviceDetail->insert($data);
         $passVeri->updateVerify($data['mobile_number']);
-        $userUpdated = $user->insert($data);
+        $userDetail = $user->insert($data);
         $msg = "Account successfully created.";
-        return $this->successMessageWithVar($msg, $userUpdated);
+        return $this->successMessageWithVar($msg, $userDetail,'userDetails');
     }
 
 }

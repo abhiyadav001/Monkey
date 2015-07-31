@@ -27,3 +27,5 @@ Route::get('/search', 'SearchController@index');
 Route::get('/locations', 'SearchController@getLocations');
 
 Route::get('/app-settings', 'SearchController@getAppSettings');
+
+Route::resource('orders', 'OrderController');
