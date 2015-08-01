@@ -10,9 +10,9 @@ class orderController extends \BaseController {
 	public function index()
 	{
 	   $order=new Order();
-           $ordersDetails=$order->getOrderDetails();
-           $msg="Orders Details are retrived successfully.";
-           return $this->successMessageWithVar($msg, $ordersDetails,'ordersDetails'); 
+           $ordersDetails=$order->getDetailedOrders();
+           $msg="Orders Details are retrieved successfully.";
+           return $this->successMessageWithVar($msg, $ordersDetails,'detailedOrders'); 
 	}
 
 	/**
@@ -22,7 +22,8 @@ class orderController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+	print_r(Input::all());
+        exit;
 	}
 
 
@@ -36,7 +37,7 @@ class orderController extends \BaseController {
 	{
             $order=new Order();
             $orderDetail=$order->getOrderById($id);
-            $msg="Order Details are retrived successfully.";
+            $msg="Order Details are retrieved successfully.";
             return $this->successMessageWithVar($msg, $orderDetail,'orderDetails');            
 	}
    

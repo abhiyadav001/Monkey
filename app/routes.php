@@ -18,7 +18,7 @@ Route::get('/', function()
 
 Route::post('/signin-mobile', 'UserController@signInMobile');
 
-Route::post('/verify-passcode', 'UserController@verifyPasscode');
+Route::post('/save-user', 'UserController@saveUserInfo');
 
 Route::post('/signup-mobile', 'UserController@signUpMobile');
 
@@ -29,4 +29,5 @@ Route::get('/locations', 'SearchController@getLocations');
 Route::get('/app-settings', 'SearchController@getAppSettings');
 
 Route::resource('orders', 'OrderController');
+
 Route::resource('reviews', 'ReviewController');

@@ -10,7 +10,8 @@ class Order extends Eloquent {
                         ->select("$this->table.*", 'users.full_name as full_name')
                         ->where("$this->table.id", $id)->first();
         $orderDetail->orderItems = $this->getItemsById($id);
-        $orderDetail->orderReviews = $review->getReviewByOrderID($id);
+        $orderDetail->orderReview = $review->getReviewByOrderID($id);
+        $orderDetail->shippingAddress = $this->getShippingAddressByOrderID($id);
         return $orderDetail;
     }
 
@@ -21,7 +22,7 @@ class Order extends Eloquent {
                         ->where('order_id', $id)->get();
     }
 
-    public function getOrderDetails() {
+    public function getDetailedOrders() {
         $where=Input::all();
         $orderIds=DB::table($this->table)->where($where)->lists('id');
         $ordersDetails=array();
@@ -30,5 +31,13 @@ class Order extends Eloquent {
             $ordersDetails[]=$orderDetails;
         }
         return $ordersDetails;
+    }
+    
+    public function getShippingAddressByOrderID($id) {
+                return $orderItems = DB::table('orders')
+                        ->join('shipping_addresses as sa', 'sa.order_id', '=', 'orders.id')
+                        ->select('sa.*')
+                        ->where('order_id', $id)->first();
+        
     }
 }
