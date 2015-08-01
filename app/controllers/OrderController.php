@@ -11,7 +11,7 @@ class orderController extends \BaseController {
 	{
 	   $order=new Order();
            $ordersDetails=$order->getOrderDetails();
-           $msg="Orders Details are retrived successfully.";
+           $msg="Orders Details are retrieved successfully.";
            return $this->successMessageWithVar($msg, $ordersDetails,'ordersDetails'); 
 	}
 
@@ -36,7 +36,7 @@ class orderController extends \BaseController {
 	{
             $order=new Order();
             $orderDetail=$order->getOrderById($id);
-            $msg="Order Details are retrived successfully.";
+            $msg="Order Details are retrieved successfully.";
             return $this->successMessageWithVar($msg, $orderDetail,'orderDetails');            
 	}
    
