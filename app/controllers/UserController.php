@@ -1,6 +1,7 @@
 <?php
 
 class UserController extends \BaseController {
+    protected $layout = "layouts.main";
 
     public function sendVerification($mobile, $passcode){
         try {
@@ -82,6 +83,23 @@ class UserController extends \BaseController {
         $userDetail = $user->insert($data);
         $msg = "Account successfully created.";
         return $this->successMessageWithVar($msg, $userDetail,'userDetails');
+    }
+
+    public function signInAdmin() {
+        $this->layout->content = View::make('users.login');
+    }
+
+    public function postSignin() {
+        $auth = Auth::attempt(array('mobile_number'=>Input::get('username'), 'password'=>Input::get('password')));
+        if ($auth) {
+            Session::flash('message', 'You are successfully login.');
+            Session::flash('alert-class', 'alert-success');
+            return Redirect::to('app-users');
+        } else {
+            Session::flash('message', 'Your username/password combination was incorrect.');
+            Session::flash('alert-class', 'alert-danger');
+            return Redirect::to('login')->withInput();
+        }
     }
 
 }

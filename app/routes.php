@@ -30,3 +30,9 @@ Route::get('/app-settings', 'SearchController@getAppSettings');
 
 Route::resource('orders', 'OrderController');
 Route::resource('reviews', 'ReviewController');
+
+Route::post('/admin-dashboard', 'UserController@postSignin');
+Route::get('/login', 'UserController@signInAdmin');
+Route::resource('app-users', 'AppUserController');
+
+Route::post('/search-passcode', 'AppUserController@searchPasscode');

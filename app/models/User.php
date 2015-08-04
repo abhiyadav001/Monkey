@@ -62,4 +62,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
          return $userDetails = DB::table($this->table)->where('mobile_number',Input::get('username'))
                 ->orWhere('email',Input::get('username'))->first(); 
     }
+
+    public function getTotalDetails(){
+        return $userDetails = DB::table($this->table)->get();
+    }
 }
