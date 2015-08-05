@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0 0 0 14px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: normal;
+  overflow-x: hidden;
+}
+
+a:link, a:visited, a:hover, a:active {
+  outline: 0;
+  border: none;
+  border: none;
+  color: #337cba;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+/*.section {
+  padding-bottom: 70px;
+}*/
+
+.footer {
+  background: #1a1a1a;
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.outerblock {
+  background: url("../img/bg.jpg") no-repeat;
+  background-size: cover;
+  display: table;
+  height: 100vh;
+  width: 100%;
+}
+
+.innerblock {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.brand {
+  margin-top: -50px;
+  text-align: center;
+}
+
+.brand .navbar-brand {
+  float: none;
+  height: auto;
+  margin: 0 auto 7px;
+  padding: 0;
+  width: 120px;
+  display: block;
+}
+.navbar-brand > img {
+    width: 100%;
+   -webkit-border-radius: 9px;
+   -moz-border-radius: 9px;
+   border-radius: 9px;
+}
+.brand h1 {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 300;
+  padding-bottom: 35px;
+}
+
+.brand h1 strong {
+  font-weight: 500;
+  display: block;
+}
+
+.calltoaction {
+  display: inline-block;
+  margin-right: 10px;
+  width: 180px;
+}
+
+.calltoaction > img {
+  width: 100%;
+}
+
+.footer p {
+  color: #ffffff;
+  padding: 9px 0 0;
+  text-align: center;
+  line-height: normal;
+}
+
+.footer p a {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.footer p a:hover {
+  text-decoration: underline;
+}
+
+.footer.external {
+    position: static;
+}
+
+
+
+
+h2 {
+    font-size: 35px;
+    padding: 50px 0;
+}
+h3{
+  padding-bottom: 25px;
+}
+p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 27px;
+    padding-bottom: 25px;
+}
+
+
+.wrapper .active-footer {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 767px) {
+  .brand {
+    margin-top: 50px;
+}
+.calltoaction {
+    margin-bottom: 50px;
+}
+  .footer {
+    position: static;
+}
+}
+
+

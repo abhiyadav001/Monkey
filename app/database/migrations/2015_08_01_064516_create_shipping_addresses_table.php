@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRewiewTable extends Migration {
+class CreateShippingAddressesTable extends Migration {
 
     /**
      * Run the migrations.
@@ -11,11 +11,15 @@ class CreateRewiewTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
-            $table->string('rating');
-            $table->text('review_message');
+            $table->string('address1');
+            $table->string('address2')->nullable();
+            $table->string('city');
+            $table->string('state')->nullable();
+            $table->string('country')->default('INDIA');
+            $table->string('zip');
             $table->timestamps();
         });
     }

@@ -18,8 +18,10 @@ class AppUserController extends \BaseController
     public function index()
     {
         $users = new User();
+        $orders = new Order();
         $user = $users->getTotalDetails();
-        $this->layout->content = View::make('users.dashboard')->with('user', $user);
+        $order = $orders->getTotalDetails();
+        $this->layout->content = View::make('users.dashboard')->with('user', $user)->with('order', $order);
     }
 
     public function searchPasscode()
@@ -33,8 +35,14 @@ class AppUserController extends \BaseController
         if (!empty($result)) {
             echo $result->passcode . "</br>";
         } else {
-            echo "<li>No Tutorial Found<li>";
+            echo "<li>No Passcode Found<li>";
         }
+    }
 
+    public function getOrder($id)
+    {
+        $order = new Order();
+        $orderDetail = $order->getOrderById($id);
+        $this->layout->content = View::make('users.order')->with('orderDetail', $orderDetail);
     }
 }
