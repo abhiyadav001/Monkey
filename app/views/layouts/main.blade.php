@@ -9,6 +9,7 @@
         {{ HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')}}
         {{ HTML::script('https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')}}
         {{ HTML::style('css/main.css')}}
+        {{ HTML::style('css/style.css')}}
     </head>
     <body>
 
