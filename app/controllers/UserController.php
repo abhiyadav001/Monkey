@@ -1,6 +1,7 @@
 <?php
 
 class UserController extends \BaseController {
+    protected $layout = "layouts.main";
 
     public function sendVerification($mobile, $passcode) {
         if ($mobile == 1111111111 || $mobile == 2222222222 || $mobile == 3333333333) {
@@ -107,6 +108,23 @@ class UserController extends \BaseController {
                     'email' => 'required|email|unique:users'
                         )
         );
+    }
+
+    public function signInAdmin() {
+        $this->layout->content = View::make('users.login');
+    }
+
+    public function postSignin() {
+        $auth = Auth::attempt(array('mobile_number'=>Input::get('username'), 'password'=>Input::get('password')));
+        if ($auth) {
+            Session::flash('message', 'You are successfully login.');
+            Session::flash('alert-class', 'alert-success');
+            return Redirect::to('app-users');
+        } else {
+            Session::flash('message', 'Your username/password combination was incorrect.');
+            Session::flash('alert-class', 'alert-danger');
+            return Redirect::to('login')->withInput();
+        }
     }
 
 }
