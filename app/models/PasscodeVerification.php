@@ -23,4 +23,14 @@ class PasscodeVerification extends Eloquent {
         return $update;
     }
 
+    public function getAllUsersPasscodes() {       
+         return  DB::table($this->table)->get();
+    }
+    
+    public function searchPasscode()
+    {
+        $mobile = Input::get("mobile");
+        $result = DB::table($this->table)->where('mobile_number', 'LIKE', '%' . $mobile . '%')->get();
+        return json_encode($result, 200);
+    }
 }

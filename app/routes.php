@@ -39,4 +39,5 @@ Route::get('/login', 'UserController@signInAdmin');
 Route::resource('app-users', 'AppUserController');
 
 Route::post('/search-passcode', 'AppUserController@searchPasscode');
+
 Route::get('/get-order/{id}', 'AppUserController@getOrder');

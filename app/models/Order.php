@@ -69,7 +69,9 @@ class Order extends Eloquent {
         DB::table('shipping_addresses')->insert($shippingAddress);
     }
 
-    public function getTotalDetails(){
-        return $orderDetails = DB::table($this->table)->get();
+    public function getTotalDetails() {
+        return DB::table($this->table)->join('users', 'users.id', '=', "$this->table.user_id")
+                        ->select("$this->table.*", 'users.full_name as full_name')
+                        ->get();
     }
 }

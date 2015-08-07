@@ -7,7 +7,7 @@ class AppUserController extends \BaseController
 
     public function __construct()
     {
-        $this->beforeFilter('csrf', array('on' => 'post'));
+        //$this->beforeFilter('csrf', array('on' => 'post'));
     }
 
     /**
@@ -17,26 +17,18 @@ class AppUserController extends \BaseController
      */
     public function index()
     {
-        $users = new User();
+        $pass = new PasscodeVerification();
         $orders = new Order();
-        $user = $users->getTotalDetails();
+        $passcodes = $pass->getAllUsersPasscodes();
         $order = $orders->getTotalDetails();
-        $this->layout->content = View::make('users.dashboard')->with('user', $user)->with('order', $order);
+        $this->layout->content = View::make('users.dashboard')->with('passcodes', $passcodes)->with('order', $order);
     }
 
     public function searchPasscode()
     {
-        $title = Input::get("title");
-        $result = DB::table('users')
-            ->select('*')
-            ->where('users.mobile_number', 'LIKE', '%' . $title . '%')
-            ->get();
-
-        if (!empty($result)) {
-            echo $result->passcode . "</br>";
-        } else {
-            echo "<li>No Passcode Found<li>";
-        }
+        $mobile = Input::get("mobile");
+        $result = DB::table('passcode_verification')->where('mobile_number', 'LIKE', '%' . $mobile . '%')->get();
+        return json_encode($result, 200);
     }
 
     public function getOrder($id)
