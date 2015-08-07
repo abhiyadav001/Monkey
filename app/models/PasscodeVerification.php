@@ -24,7 +24,7 @@ class PasscodeVerification extends Eloquent {
     }
 
     public function getAllUsersPasscodes() {       
-         return  DB::table($this->table)->get();
+         return  DB::table($this->table)->simplePaginate(10);
     }
     
     public function searchPasscode()

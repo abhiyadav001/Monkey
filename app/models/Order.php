@@ -1,28 +1,32 @@
 <?php
 
-class Order extends Eloquent {
+class Order extends Eloquent
+{
 
     protected $table = 'orders';
 
-    public function getOrderById($id) {
+    public function getOrderById($id)
+    {
         $review = new Review();
         $orderDetail = DB::table($this->table)->join('users', 'users.id', '=', "$this->table.user_id")
-                        ->select("$this->table.*", 'users.full_name as full_name')
-                        ->where("$this->table.id", $id)->first();
+            ->select("$this->table.*", 'users.full_name as full_name')
+            ->where("$this->table.id", $id)->first();
         $orderDetail->orderItems = $this->getItemsById($id);
         $orderDetail->orderReview = $review->getReviewByOrderID($id);
         $orderDetail->shippingAddress = $this->getShippingAddressByOrderID($id);
         return $orderDetail;
     }
 
-    public function getItemsById($id) {
+    public function getItemsById($id)
+    {
         return $orderItems = DB::table('order_details')
-                        ->join('medicines', 'order_details.medicine_id', '=', 'medicines.id')
-                        ->select('order_details.*', 'medicines.name as medicine')
-                        ->where('order_id', $id)->get();
+            ->join('medicines', 'order_details.medicine_id', '=', 'medicines.id')
+            ->select('order_details.*', 'medicines.name as medicine')
+            ->where('order_id', $id)->get();
     }
 
-    public function getDetailedOrders() {
+    public function getDetailedOrders()
+    {
         $where = Input::all();
         $orderIds = DB::table($this->table)->where($where)->lists('id');
         $ordersDetails = array();
@@ -33,14 +37,16 @@ class Order extends Eloquent {
         return $ordersDetails;
     }
 
-    public function getShippingAddressByOrderID($id) {
+    public function getShippingAddressByOrderID($id)
+    {
         return $orderItems = DB::table('orders')
-                        ->join('shipping_addresses as sa', 'sa.order_id', '=', 'orders.id')
-                        ->select('sa.*')
-                        ->where('order_id', $id)->first();
+            ->join('shipping_addresses as sa', 'sa.order_id', '=', 'orders.id')
+            ->select('sa.*')
+            ->where('order_id', $id)->first();
     }
 
-    public function saveOrder() {
+    public function saveOrder()
+    {
         $this->user_id = Input::get('user_id');
         $this->subtotal = Input::get('subtotal');
         $this->tax = Input::get('tax');
@@ -51,7 +57,8 @@ class Order extends Eloquent {
         return $this;
     }
 
-    public function saveOrderItems($orderId) {
+    public function saveOrderItems($orderId)
+    {
         $orderItems = Input::get('orderItems');
         foreach ($orderItems as $orderItem) {
             $orderItem['order_id'] = $orderId;
@@ -61,7 +68,8 @@ class Order extends Eloquent {
         }
     }
 
-    public function saveShippingAddress($orderId) {
+    public function saveShippingAddress($orderId)
+    {
         $shippingAddress = Input::get('shippingAddress');
         $shippingAddress['order_id'] = $orderId;
         $shippingAddress['created_at'] = date("Y-m-d H:i:s");
@@ -69,9 +77,10 @@ class Order extends Eloquent {
         DB::table('shipping_addresses')->insert($shippingAddress);
     }
 
-    public function getTotalDetails() {
+    public function getTotalDetails()
+    {
         return DB::table($this->table)->join('users', 'users.id', '=', "$this->table.user_id")
-                        ->select("$this->table.*", 'users.full_name as full_name')
-                        ->get();
+            ->select("$this->table.*", 'users.full_name as full_name')
+            ->simplePaginate(10);
     }
 }

@@ -22,25 +22,15 @@
                             url: "/search-passcode",
                             data: "mobile=" + mobile,
                             success: function (data) {
-                                var   trHTML='';
+                                var trHTML = '';
                                 $("#userresult").empty();
-                                //return false;
-                                var jsonstring=$.parseJSON(data);
-                                $.each(jsonstring, function( index, value ) {
-  //alert( index + ": " + value.mobile_number );
+                                var jsonstring = $.parseJSON(data);
+                                $.each(jsonstring, function (index, value) {
+                                    trHTML += '<tr id=' + value.mobile_number + '><td>' + value.mobile_number + '</td><td>' + value.passcode + '</td><td>'
+                                        + value.verified_status + '</td><td>' + value.created_at + '</td></tr>';
+                                });
+                                $('#userresult').append(trHTML);
 
-                                //alert(index);
-                                //return false;
-                               trHTML += '<tr id='+value.mobile_number+'><td>' + value.mobile_number + '</td><td>' + value.passcode + '</td><td>' 
-                                       + value.verified_status + '</td><td>'+value.created_at+'</td></tr>';
-                               
-                               });
-                               $('#userresult').append(trHTML);
-                                //alert(jstng.email);
-                                //return false;
-                                
-                                //$("#result").html(data);
-                                //$("#search").val("");
                             }
                         });
                     }
@@ -78,8 +68,9 @@
 
             </tbody>
         </table>
-
+        <?php echo $passcodes->links(); ?>
     </div>
+
     <div id="orders" class="tab-pane fade">
         <h3>Orders</h3>
         <table class="table table-striped table-bordered header-fixed">
@@ -111,6 +102,7 @@
 
             </tbody>
         </table>
+        <?php echo $order->links(); ?>
     </div>
 </div>
 
