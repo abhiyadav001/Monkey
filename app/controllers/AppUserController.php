@@ -18,10 +18,13 @@ class AppUserController extends \BaseController
     public function index()
     {
         $pass = new PasscodeVerification();
-        $orders = new Order();
+        $order = new Order();
+        $medi=new Medicine();
         $passcodes = $pass->getAllUsersPasscodes();
-        $order = $orders->getTotalDetails();
-        $this->layout->content = View::make('users.dashboard')->with('passcodes', $passcodes)->with('order', $order);
+        $orders = $order->getTotalDetails();
+        $medicines = $medi->getAllMedicines();
+        $this->layout->content = View::make('users.dashboard')->with('passcodes', $passcodes)
+                ->with('orders', $orders)->with('medicines',$medicines);
     }
 
     public function searchPasscode()

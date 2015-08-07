@@ -1,12 +1,13 @@
 <h1 class="form-signin-heading text-center">Admin Dashboard</h1>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#users">Users</a></li>
+    <li class="active"><a data-toggle="tab" href="#passcodes">Users Passcodes</a></li>
     <li><a data-toggle="tab" href="#orders">Orders</a></li>
+    <li><a data-toggle="tab" href="#medicines">Medicines</a></li>
 </ul>
 
 
 <div class="tab-content">
-    <div id="users" class="tab-pane fade in active">
+    <div id="passcodes" class="tab-pane fade in active">
         <h3>Users</h3>
         <input type="text" id="search" placeholder="Enter Mobile Number"/>
         <input type="button" id="button" value="Search Passcode"/>
@@ -87,22 +88,53 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($order as $orders)
+            @foreach ($orders as $order)
             <tr>
-                <td><a href="/get-order/<?php echo $orders->id; ?>">{{ $orders->id }}</a></td>
-                <td>{{ $orders->full_name}}</td>
-                <td>₹{{ $orders->subtotal }}</td>
-                <td>₹{{ $orders->discount }}</td>
-                <td>₹{{ $orders->shipping_amount }}</td>
-                <td>₹{{ $orders->charged_amount }}</td>
-                <td>{{ $orders->created_at }}</td>
-                <td>{{ $orders->status }}</td>
+                <td><a href="/get-order/<?php echo $order->id; ?>">{{ $order->id }}</a></td>
+                <td>{{ $order->full_name}}</td>
+                <td>₹{{ $order->subtotal }}</td>
+                <td>₹{{ $order->discount }}</td>
+                <td>₹{{ $order->shipping_amount }}</td>
+                <td>₹{{ $order->charged_amount }}</td>
+                <td>{{ $order->created_at }}</td>
+                <td>{{ $order->status }}</td>
             </tr>
             @endforeach
 
             </tbody>
         </table>
-        <?php echo $order->links(); ?>
+        <?php echo $orders->links(); ?>
+    </div>
+        <div id="medicines" class="tab-pane fade">
+        <h3>Orders</h3>
+        <table class="table table-striped table-bordered header-fixed">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Buyer Name</th>
+                <th>Total Amt</th>
+                <th>Discount</th>
+                <th>Shipping Amt</th>
+                <th>Charged Amt</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($medicines as $medicine)
+            <tr>
+                <td>{{ $medicine->name}}</td>
+                <td>₹{{ $medicine->name }}</td>
+                <td>₹{{ $medicine->name }}</td>
+                <td>₹{{ $medicine->name }}</td>
+                <td>₹{{ $medicine->name }}</td>
+                <td>{{ $medicine->name }}</td>
+                <td>{{ $medicine->name }}</td>
+            </tr>
+            @endforeach
+
+            </tbody>
+        </table>
+        <?php echo $medicines->links(); ?>
     </div>
 </div>
 
