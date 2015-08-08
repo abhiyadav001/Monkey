@@ -23,8 +23,10 @@ class AppUserController extends \BaseController
         $passcodes = $pass->getAllUsersPasscodes();
         $orders = $order->getTotalDetails();
         $medicines = $medi->getAllMedicines();
+        $appsetng=new User();
+        $appSettings=$appsetng->getAllAppSettings();
         $this->layout->content = View::make('users.dashboard')->with('passcodes', $passcodes)
-                ->with('orders', $orders)->with('medicines',$medicines);
+                ->with('orders', $orders)->with('medicines',$medicines)->with('appSettings',$appSettings);
     }
 
     public function searchPasscode()

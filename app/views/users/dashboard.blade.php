@@ -3,6 +3,7 @@
     <li class="active"><a data-toggle="tab" href="#passcodes">Users Passcodes</a></li>
     <li><a data-toggle="tab" href="#orders">Orders</a></li>
     <li><a data-toggle="tab" href="#medicines">Medicines</a></li>
+    <li><a data-toggle="tab" href="#app-settings">App Settings</a></li>
 </ul>
 
 
@@ -135,6 +136,32 @@
             </tbody>
         </table>
         <?php echo $medicines->links(); ?>
+    </div>
+        <div id="app-settings" class="tab-pane fade">
+        <h3>App Settings</h3>
+        <table class="table table-striped table-bordered header-fixed">
+            <thead>
+            <tr>
+                <th>Location</th>
+                <th>Quick Delivery Status</th>
+                <th>Discount%</th>
+                <th>Minimum Order Amount</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($appSettings as $appsetting)
+            <tr>
+                <td>{{ $appsetting->location}}</td>
+                <td>{{ $appsetting->quick_delivery_status }}</td>
+                <td>{{ $appsetting->discount_percent }}</td>
+                <td>{{ $appsetting->min_order }}</td>
+                <td>{{ $appsetting->status }}</td>
+            </tr>
+            @endforeach
+
+            </tbody>
+        </table>
     </div>
 </div>
 
