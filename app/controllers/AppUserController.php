@@ -42,4 +42,12 @@ class AppUserController extends \BaseController
         $orderDetail = $order->getOrderById($id);
         $this->layout->content = View::make('users.order')->with('orderDetail', $orderDetail);
     }
+
+    public function updateStatus()
+    {
+        $order = new Order();
+        $status = Input::get("status");
+        $id = Input::get("id");
+        $order->updateStatus($id,$status);
+    }
 }

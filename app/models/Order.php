@@ -83,4 +83,8 @@ class Order extends Eloquent
             ->select("$this->table.*", 'users.full_name as full_name')
             ->simplePaginate(10);
     }
+
+    public function updateStatus($id, $status){
+        return DB::table('orders')->where('id', $id)->update(['status' => $status]);
+    }
 }
