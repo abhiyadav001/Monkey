@@ -49,5 +49,6 @@ class AppUserController extends \BaseController
         $status = Input::get("status");
         $id = Input::get("id");
         $order->updateStatus($id,$status);
+        return "success";
     }
 }

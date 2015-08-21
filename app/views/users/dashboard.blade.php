@@ -120,52 +120,44 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#" data-value={{$newStatusValue[0]}}>{{$newStatusValue[0]}}</a></li>
-                        <li><a href="#" data-value={{$newStatusValue[1]}}>{{$newStatusValue[1]}}</a></li>
-                        <li><a href="#" data-value={{$newStatusValue[2]}}>{{$newStatusValue[2]}}</a></li>
+                        <li><a href="#" id="{{ $order->id }}">{{$newStatusValue[0]}}</a></li>
+                        <li><a href="#" id="{{ $order->id }}">{{$newStatusValue[1]}}</a></li>
+                        <li><a href="#" id="{{ $order->id }}">{{$newStatusValue[2]}}</a></li>
                     </ul>
                 </div>
-                <input type="button" id="update" value="Update"/>
-
-                <script>
-                    $(".dropdown-menu li a").click(function () {
-                        $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-                        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-                    });
-                </script>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        function updateValue() {
-                            console.log('helllo');
-                            var status = $("#status-button").val();
-                            var id =  <?php echo $order->id; ?>
-                            if (status != "") {
-                                $.ajax({
-                                    type: "post",
-                                    url: "/update-status",
-                                    data: {"status": status, "id": id},
-                                    success: function (data) {
-
-                                    }
-                                });
-                            }
-                        }
-
-                        $("#update").click(function () {
-                            alert('ddddddddddddddd');
-                            console.log('ddddddddd');
-                            updateValue();
-                        });
-
-                    });
-                </script>
             </td>
         </tr>
         @endforeach
 
         </tbody>
     </table>
+    
     <?php echo $orders->links(); ?>
+                    <script type="text/javascript">
+                    $(document).ready(function () {
+                        function updateValue(id,status) {
+                            if (status != "") {
+                                $.ajax({
+                                    type: "post",
+                                    url: "/update-status",
+                                    data: {"status": status, "id": id},
+                                    success: function (data) {
+                                        if(data=='success'){
+                                            alert('Status successfully updated.');
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    $(".dropdown-menu li a").click(function () {
+                        var id = $(this).attr('id');
+                        var status = $(this).text();
+                        $(this).parents(".dropdown").find('.btn').html(status + ' <span class="caret"></span>');
+                        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+                        updateValue(id,status);
+                    });
+                    });
+                </script>
 </div>
 <div id="medicines" class="tab-pane fade">
     <h3>Orders</h3>
