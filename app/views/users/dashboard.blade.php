@@ -5,14 +5,37 @@
     <li><a data-toggle="tab" href="#medicines">Medicines</a></li>
     <li><a data-toggle="tab" href="#app-settings">App Settings</a></li>
 </ul>
-
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+        $(function () {
+            $("#from").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                onClose: function (selectedDate) {
+                    $("#to").datepicker("option", "minDate", selectedDate);
+                }
+            });
+            $("#to").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                onClose: function (selectedDate) {
+                    $("#from").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+        });
+    </script>
+</head>
 
 <div class="tab-content">
 <div id="passcodes" class="tab-pane fade in active">
     <h3>Users</h3>
     <input type="text" id="search" placeholder="Enter Mobile Number"/>
     <input type="button" id="button" value="Search Passcode"/>
-
+<br/><br/>
     <div id="result"></div>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -75,6 +98,13 @@
 
 <div id="orders" class="tab-pane fade">
     <h3>Orders</h3>
+        <input type="text" id="mobile" name="mobile" placeholder="Enter Mobile Number"/>
+        <input type="text" id="from" name="from" placeholder="Created From">
+        <input type="text" id="to" name="to" placeholder="Created To">
+        <input type="text" id="status" name="status" placeholder="Status">
+        <input type="button" id="button" value="Search order"/>
+        <br/><br/>
+        
     <table class="table table-striped table-bordered header-fixed">
         <thead>
         <tr>
@@ -160,35 +190,35 @@
                 </script>
 </div>
 <div id="medicines" class="tab-pane fade">
-    <h3>Orders</h3>
+    <h3>Medicines</h3>
     <table class="table table-striped table-bordered header-fixed">
         <thead>
         <tr>
-            <th>Order ID</th>
-            <th>Buyer Name</th>
-            <th>Total Amt</th>
-            <th>Discount</th>
-            <th>Shipping Amt</th>
-            <th>Charged Amt</th>
-            <th>Date</th>
+            <th>Name</th>
+            <th>Form</th>
+            <th>Type</th>
+            <th>Pack Size</th>
+            <th>Unit size</th>
+            <th>MRP</th>
+            <th>Availability</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($medicines as $medicine)
         <tr>
             <td>{{ $medicine->name}}</td>
-            <td>₹{{ $medicine->name }}</td>
-            <td>₹{{ $medicine->name }}</td>
-            <td>₹{{ $medicine->name }}</td>
-            <td>₹{{ $medicine->name }}</td>
-            <td>{{ $medicine->name }}</td>
-            <td>{{ $medicine->name }}</td>
+            <td>{{ $medicine->form }}</td>
+            <td>{{ $medicine->type }}</td>
+            <td>{{ $medicine->packsize }}</td>
+            <td>{{ $medicine->unit_size }}</td>
+            <td>{{ $medicine->mrp }}</td>
+            <td>{{ $medicine->available }}</td>
         </tr>
         @endforeach
 
         </tbody>
     </table>
-    <?php echo $medicines->links(); ?>
+    <?php //echo $medicines->links(); ?>
 </div>
 <div id="app-settings" class="tab-pane fade">
     <h3>App Settings</h3>
